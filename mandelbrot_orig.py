@@ -36,13 +36,13 @@ xs = tf.constant(Z.astype("complex64"))
 zs = tf.Variable(xs)
 ns = tf.Variable(tf.zeros_like(xs, "float32"))
 
-tf.initialize_all_variables().run()
+tf.global_variables_initializer().run()
 
 # Compute the new values of z: z^2 + x
 zs_ = zs*zs + xs
 
 # Have we diverged with this new value?
-not_diverged = tf.complex_abs(zs_) < 4
+not_diverged = tf.abs(zs_) < 4
 
 # Operation to update the zs and the iteration count.
 #
